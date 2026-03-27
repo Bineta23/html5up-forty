@@ -12,12 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Setup Node.js (si besoin)
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-      - run: npm install
-      - run: npm run build
+      - name: Prepare static files
+        run: |
+          mkdir -p build
+          cp -r * build/ 2>/dev/null || true
       - uses: actions/upload-artifact@v4
         with:
           name: build
@@ -32,7 +30,7 @@ jobs:
         with:
           name: build
           path: ./build
-      - name: Deploy to GitHub Pages (exemple)
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
