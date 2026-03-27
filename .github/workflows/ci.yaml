@@ -7,11 +7,11 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  security-events: write
+  contents: write          # nécessaire pour peaceiris/actions-gh-pages
+  security-events: write   # pour uploader le rapport Trivy
 
 env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true   # optionnel : supprime l'avertissement Node 20
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true   # optionnel : utilise Node.js 24
 
 jobs:
   build:
